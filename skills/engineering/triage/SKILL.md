@@ -89,17 +89,17 @@ Show counts and a one-line summary per item. Let the maintainer pick.
 
 ## Promoting an inbox card (local tracker only)
 
-This applies only when the repo uses the local-markdown tracker (see the issue-tracker config). GitHub and GitLab have no inbox convention — there is no `.scratch/inbox/`, skip this section on those trackers.
+This applies only when the repo uses the local-markdown tracker (see the issue-tracker config). GitHub and GitLab have no inbox convention, so there is no `.scratch/inbox/`; skip this section on those trackers.
 
-An inbox card (`.scratch/inbox/<slug>.md`, or `.scratch/inbox/<slug>/<slug>.md` when it carries attachments — `Status: needs-triage`) is triaged the same way as any other `needs-triage` item — same steps above: gather context, recommend, verify, grill. Moving it to `ready-for-agent` or `ready-for-human` (step 5) is **promotion**: turning it from a parked idea into a real board ticket. It's not a separate operation, just that state transition plus the mechanics of giving the card a permanent home:
+An inbox card (`.scratch/inbox/<slug>.md`, or `.scratch/inbox/<slug>/<slug>.md` when it carries attachments, with `Status: needs-triage`) is triaged the same way as any other `needs-triage` item, following the same steps above: gather context, recommend, verify, grill. Moving it to `ready-for-agent` or `ready-for-human` (step 5) is **promotion**: turning it from a parked idea into a real board ticket. It's not a separate operation, just that state transition plus the mechanics of giving the card a permanent home:
 
-1. Flesh out the card — grill it into shape if it's thin (step 4).
+1. Flesh out the card, grilling it into shape if it's thin (step 4).
 2. Assign the next `NN` id for the target feature.
 3. Set the `Status:` line to the agreed state.
-4. Move the file to `<feature-slug>/issues/<NN>-<slug>.md`, creating a new `.scratch/<feature-slug>/` directory if none of the existing ones fit. A card that is a directory moves whole — its attachments travel with it, and the ticket file inside takes the `<NN>-` prefix.
+4. Move the file to `<feature-slug>/issues/<NN>-<slug>.md`, creating a new `.scratch/<feature-slug>/` directory if none of the existing ones fit. A card that is a directory moves whole: its attachments travel with it, and the ticket file inside takes the `<NN>-` prefix.
 5. Attach an agent brief per [AGENT-BRIEF.md](AGENT-BRIEF.md).
 
-If the card is `wontfix`, apply the existing rules from step 5 unchanged — rejected enhancements go to `.out-of-scope/` ([OUT-OF-SCOPE.md](OUT-OF-SCOPE.md)). No separate rejection path for inbox cards.
+If the card is `wontfix`, apply the existing rules from step 5 unchanged: rejected enhancements go to `.out-of-scope/` ([OUT-OF-SCOPE.md](OUT-OF-SCOPE.md)). No separate rejection path for inbox cards.
 
 ## Quick state override
 

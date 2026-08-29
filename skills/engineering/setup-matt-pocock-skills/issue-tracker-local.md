@@ -12,34 +12,34 @@ Issues and specs for this repo live as markdown files in `.scratch/`.
 
 ### The resolved state
 
-The five triage roles in `triage-labels.md` answer "who should act on this ticket next". None of them means "done" — on GitHub that is `closed`, a separate axis from labels. A single `Status:` line has no second axis, so the resolved state needs a string of its own:
+The five triage roles in `triage-labels.md` answer "who should act on this ticket next". None of them means "done": on GitHub that is `closed`, a separate axis from labels. A single `Status:` line has no second axis, so the resolved state needs a string of its own:
 
-**`resolved`** — the ticket's acceptance criteria are met. Optionally followed by a parenthetical citing the commits and any deliberate deviations: `Status: resolved (implemented in abc1234; one deviation: …)`.
+**`resolved`**: the ticket's acceptance criteria are met. Optionally followed by a parenthetical citing the commits and any deliberate deviations: `Status: resolved (implemented in abc1234; one deviation: …)`.
 
-Don't reach for a triage role to express completion. `ready-for-human` on a finished ticket reads as "waiting for a human to build it", which is the opposite of what happened. Conversely, a ticket whose remaining work genuinely needs a human — a step the agent is sandboxed out of, say — stays `ready-for-human` and is not resolved, however much of it is already built.
+Don't reach for a triage role to express completion. `ready-for-human` on a finished ticket reads as "waiting for a human to build it", which is the opposite of what happened. Conversely, a ticket whose remaining work genuinely needs a human (a step the agent is sandboxed out of, say) stays `ready-for-human` and is not resolved, however much of it is already built.
 
 `resolved` is the same string the wayfinding section below uses.
 
-`.scratch/` **is tracked by git.** Don't add it to `.gitignore`. It holds specs and wayfinder maps, not just tickets — losing it loses the reasoning behind the work.
+`.scratch/` **is tracked by git.** Don't add it to `.gitignore`. It holds specs and wayfinder maps, not just tickets: losing it loses the reasoning behind the work.
 
 ### Archiving a finished feature
 
-When every ticket in a feature directory is `resolved`, **delete the directory** — one commit per feature, `chore(tracker): archive <feature-slug>`. Git history is the archive: the deletion is itself tracked, so "losing the reasoning" doesn't apply — `git log --oneline -- .scratch/<feature-slug>/` brings the whole feature back.
+When every ticket in a feature directory is `resolved`, **delete the directory**, one commit per feature, `chore(tracker): archive <feature-slug>`. Git history is the archive: the deletion is itself tracked, so "losing the reasoning" doesn't apply; `git log --oneline -- .scratch/<feature-slug>/` brings the whole feature back.
 
 Three ordering constraints:
 
-- **Close-out before archive.** A directory holding any open or `ready-for-human` ticket is not finished, however much of it is built — never archive around a live ticket.
+- **Close-out before archive.** A directory holding any open or `ready-for-human` ticket is not finished, however much of it is built. Never archive around a live ticket.
 - **Archive before inbox triage.** Clear finished features first, so `/triage` promotes cards into a tracker that only shows live work.
-- **Sweep dead pointers before delete.** Grep for long-lived files pointing into the directory. Git history preserves the content, not the pointer — a `See .scratch/<slug>/issues/05-….md` line in a module docstring survives the deletion as a dangling reference, and the reader of that module has no way to know it once resolved. Move what each pointer was carrying to where it will actually be read, then drop the pointer.
+- **Sweep dead pointers before delete.** Grep for long-lived files pointing into the directory. Git history preserves the content, not the pointer: a `See .scratch/<slug>/issues/05-….md` line in a module docstring survives the deletion as a dangling reference, and the reader of that module has no way to know it once resolved. Move what each pointer was carrying to where it will actually be read, then drop the pointer.
 
 ## Inbox: ideas that don't belong to a feature yet
 
-- Path: `.scratch/inbox/<slug>.md` — repo-global, not under any `<feature-slug>/`
-- Not numbered — numbering happens on promotion
+- Path: `.scratch/inbox/<slug>.md`, repo-global, not under any `<feature-slug>/`
+- Not numbered; numbering happens on promotion
 - Carries `Status: needs-triage`
-- Shape matches the rest of the tracker: a `Status:` line near the top, then a plain markdown body. Nothing else — no frontmatter, no extra structure.
+- Shape matches the rest of the tracker: a `Status:` line near the top, then a plain markdown body. Nothing else: no frontmatter, no extra structure.
 
-A card that needs to carry material with it — a salvaged script, a screenshot, a log — becomes a directory instead: `.scratch/inbox/<slug>/<slug>.md` alongside its files. Same card, same `Status:` line; the directory is just where the attachments live. Reach for it only when the material genuinely can't be a link — the single file is the default.
+A card that needs to carry material with it (a salvaged script, a screenshot, a log) becomes a directory instead: `.scratch/inbox/<slug>/<slug>.md` alongside its files. Same card, same `Status:` line; the directory is just where the attachments live. Reach for it only when the material genuinely can't be a link; the single file is the default.
 
 Example inbox card, `.scratch/inbox/dark-mode-toggle.md`:
 
@@ -52,7 +52,7 @@ Users keep asking for a dark mode toggle in settings. Not sure yet
 which feature this belongs to, or whether it's its own feature.
 ```
 
-Promoting an inbox card onto the board — filling it out, assigning it an id, setting its `Status`, and moving it into `<feature-slug>/issues/` — is the `triage` skill's job, not defined here. This section only defines what the card looks like and where it lives before that happens.
+Promoting an inbox card onto the board (filling it out, assigning it an id, setting its `Status`, and moving it into `<feature-slug>/issues/`) is the `triage` skill's job, not defined here. This section only defines what the card looks like and where it lives before that happens.
 
 ## When a skill says "publish to the issue tracker"
 

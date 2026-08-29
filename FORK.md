@@ -44,7 +44,7 @@ git rebase main
 ```
 
 第 2 步的 `--ff-only` 是安全閥，意思是「不能快轉就直接失敗」。
-它失敗代表 `main` 上混進了不該有的 commit——這時候該停下來查清楚，
+它失敗代表 `main` 上混進了不該有的 commit，這時候該停下來查清楚，
 不要改用一般 merge 硬合過去。
 
 第 4 步選 rebase 而非 merge，是因為 `mine` 還沒推到任何 remote，
@@ -70,9 +70,9 @@ git diff --name-status main..mine
 
 三個都是**修改上游既有檔案**，不是新增檔案：
 
-- `skills/engineering/implement/SKILL.md` — 改成走我的 git workflow（分支檢查、逐檔 add）
-- `skills/engineering/triage/SKILL.md` — 在本地 tracker 上提升 inbox 卡片
-- `skills/engineering/setup-matt-pocock-skills/issue-tracker-local.md` — 加上 inbox、resolved 狀態與封存
+- `skills/engineering/implement/SKILL.md`：改成走我的 git workflow（分支檢查、逐檔 add）
+- `skills/engineering/triage/SKILL.md`：在本地 tracker 上提升 inbox 卡片
+- `skills/engineering/setup-matt-pocock-skills/issue-tracker-local.md`：加上 inbox、resolved 狀態與封存
 
 因為是修改而非新增，**上游改動同一份檔案時 rebase 會衝突**，這是預期內的，
 不是設定壞掉。解法照 `/resolving-merge-conflicts` skill 走，
@@ -80,6 +80,6 @@ git diff --name-status main..mine
 
 ## 不要做的事
 
-- 不要在 `main` 上 commit——會破壞 fast-forward 的前提
-- 不要 `git push upstream`——雖然已被 `pushurl` 擋掉，但別依賴保險絲
-- 不要把 fork 專屬內容寫進 `README.md` 或 `docs/`——那是上游的地盤，每次同步都要解衝突
+- 不要在 `main` 上 commit，會破壞 fast-forward 的前提
+- 不要 `git push upstream`，雖然已被 `pushurl` 擋掉，但別依賴保險絲
+- 不要把 fork 專屬內容寫進 `README.md` 或 `docs/`，那是上游的地盤，每次同步都要解衝突
